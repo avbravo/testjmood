@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:jmoordbjsf="http://jmoordbjsf.com/taglib"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <f:view contentType="text/html">
+     <b:form id="form"  prependId="false"   onkeypress="if (event.keyCode == 13) {
+                    return false;
+                }">
+            <h:panelGroup id="content" layout="block"> 
+
+                <jmoordbjsf:messages id="msg"/>
+                <jmoordbjsf:toolbarnew label="#{msg['field.idrol']}"
+                                       title="#{msg['titleview.rol']}"
+                                       value="#{rolController.rol.idrol}"
+                                       disabled="#{rolController.writable}"
+                                    
+                                       rendererList="#{applicationMenu.rol.list}"
+                                       controller="#{rolController}"
+                                     url  = "/pages/rol/list.xhtml"
+
+                                       />
+                <b:panel title="#{app['title.data']}" look="primary" rendered="#{rolController.writable}">
+
+
+
+                    <b:panelGrid id="panel" colSpans="2,10" size="xs" rendered="#{rolController.writable}"> 
+
+                        <p:outputLabel  value="#{msg['field.rol']}" />
+                        <jmoordbjsf:inputText value="#{rolController.rol.rol}" id="rol"  label="#{msg['field.rol']}" />
+
+
+
+                        <p:outputLabel  value="#{msg['field.activo']}" />
+                        <jmoordbjsf:yesno value="#{rolController.rol.activo}" id="activo"  required="true"/>
+
+
+
+                        <jmoordbjsf:toolbarsave
+                           
+                            controller="#{rolController}"
+                        
+                            />
+
+
+                    </b:panelGrid>                    
+
+                </b:panel>
+            </h:panelGroup>
+        </b:form>
+        
+
+        </f:view>
+</html>
+
