@@ -38,10 +38,7 @@ import org.primefaces.context.RequestContext;
 @Named(value = "rolController")
 @ViewScoped
 public class RolController implements Serializable, IController {
-@Inject
-    RevisionHistoryStoreejbRepository revisionHistoryStoreejbRepository;
-    @Inject
-    RevisionHistoryServices revisionHistoryServices;
+
     private static final long serialVersionUID = 1L;
     private Boolean writable = false;
     Integer page = 1;
@@ -61,8 +58,7 @@ public class RolController implements Serializable, IController {
     AutoincrementableStoreejbRepository autoincrementableRepository;
     @Inject
     RolRepository rolRepository;
-@Inject
-UsuarioRepository usuarioRepository;
+
     @Inject
     RolServices rolServices;
 
@@ -160,23 +156,7 @@ UsuarioRepository usuarioRepository;
     public void init() {
         try {
 
-            JmoordbConfiguration jmc = new JmoordbConfiguration.Builder()
-                    .withSpanish(true)
-                    .withRepositoryRevisionHistory(revisionHistoryStoreejbRepository)
-                    .withRevisionHistoryServices(revisionHistoryServices)
-                    .withRevisionSave(true)
-                    .withUsername("avbravo")
-                    .build();
-
-                       Usuario usuario= new Usuario();
-                       usuario.setUsername("avbravo");
-              Optional<Usuario> optional = usuarioRepository.findById(usuario);
-              if(!optional.isPresent()){
-                  JsfUtil.errorDialog("init", "Usuario no encontrado");
-              }else{
-                  usuario = optional.get();
-              }
-            JmoordbContext.put("_userLogged", usuario);
+           
             /*
             configurar el ambiente del controller
              */
